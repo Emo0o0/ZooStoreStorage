@@ -5,9 +5,9 @@ import com.example.zoostorestorage.core.exceptions.ItemAlreadyExistsException;
 import com.example.zoostorestorage.core.exceptions.ItemNotFoundException;
 import com.example.zoostorestorage.persistence.entities.Storage;
 import com.example.zoostorestorage.persistence.repositories.StorageRepository;
-import com.example.zoostorestorage.api.inputOutput.item.addItemToStorage.AddItemToStorageInput;
-import com.example.zoostorestorage.api.inputOutput.item.addItemToStorage.AddItemToStorageOutput;
-import com.example.zoostorestorage.api.inputOutput.item.addItemToStorage.ItemAddToStorageOperation;
+import com.example.zoostorestorage.api.inputoutput.item.addtostorage.AddItemToStorageInput;
+import com.example.zoostorestorage.api.inputoutput.item.addtostorage.AddItemToStorageOutput;
+import com.example.zoostorestorage.api.inputoutput.item.addtostorage.ItemAddToStorageOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

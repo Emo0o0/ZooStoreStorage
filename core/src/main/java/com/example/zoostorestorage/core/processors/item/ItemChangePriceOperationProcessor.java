@@ -4,9 +4,9 @@ import com.example.zoostorestorage.core.exceptions.ItemNotFoundException;
 import com.example.zoostorestorage.core.exceptions.PriceIsNotPositiveException;
 import com.example.zoostorestorage.persistence.entities.Storage;
 import com.example.zoostorestorage.persistence.repositories.StorageRepository;
-import com.example.zoostorestorage.api.inputOutput.item.changeItemPrice.ChangePriceInput;
-import com.example.zoostorestorage.api.inputOutput.item.changeItemPrice.ChangePriceOutput;
-import com.example.zoostorestorage.api.inputOutput.item.changeItemPrice.ItemChangePriceOperation;
+import com.example.zoostorestorage.api.inputoutput.item.changeprice.ChangePriceInput;
+import com.example.zoostorestorage.api.inputoutput.item.changeprice.ChangePriceOutput;
+import com.example.zoostorestorage.api.inputoutput.item.changeprice.ItemChangePriceOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

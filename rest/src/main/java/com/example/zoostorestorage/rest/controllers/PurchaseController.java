@@ -1,8 +1,8 @@
 package com.example.zoostorestorage.rest.controllers;
 
-import com.example.zoostorestorage.api.inputOutput.order.CreateOrderRecordInput;
-import com.example.zoostorestorage.api.inputOutput.order.CreateOrderRecordOutput;
-import com.example.zoostorestorage.api.inputOutput.order.OrderRecordCreateOperation;
+import com.example.zoostorestorage.api.inputoutput.order.CreateOrderRecordInput;
+import com.example.zoostorestorage.api.inputoutput.order.CreateOrderRecordOutput;
+import com.example.zoostorestorage.api.inputoutput.order.OrderRecordCreateOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

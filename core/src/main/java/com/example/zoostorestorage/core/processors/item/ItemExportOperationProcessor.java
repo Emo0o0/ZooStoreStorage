@@ -4,9 +4,9 @@ import com.example.zoostorestorage.core.exceptions.ItemNotFoundException;
 import com.example.zoostorestorage.core.exceptions.NegativeQuantityException;
 import com.example.zoostorestorage.persistence.entities.Storage;
 import com.example.zoostorestorage.persistence.repositories.StorageRepository;
-import com.example.zoostorestorage.api.inputOutput.item.exportItem.ExportItemInput;
-import com.example.zoostorestorage.api.inputOutput.item.exportItem.ExportItemOutput;
-import com.example.zoostorestorage.api.inputOutput.item.exportItem.ItemExportOperation;
+import com.example.zoostorestorage.api.inputoutput.item.exportitem.ExportItemInput;
+import com.example.zoostorestorage.api.inputoutput.item.exportitem.ExportItemOutput;
+import com.example.zoostorestorage.api.inputoutput.item.exportitem.ItemExportOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

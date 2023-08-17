@@ -1,8 +1,8 @@
 package com.example.zoostorestorage.restexport;
 
-import com.example.zoostorestorage.api.inputOutput.item.getItemFromStorage.GetItemFromStorageOutput;
-import com.example.zoostorestorage.api.inputOutput.order.CreateOrderRecordInput;
-import com.example.zoostorestorage.api.inputOutput.order.CreateOrderRecordOutput;
+import com.example.zoostorestorage.api.inputoutput.item.getfromstorage.GetItemFromStorageOutput;
+import com.example.zoostorestorage.api.inputoutput.order.CreateOrderRecordInput;
+import com.example.zoostorestorage.api.inputoutput.order.CreateOrderRecordOutput;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;

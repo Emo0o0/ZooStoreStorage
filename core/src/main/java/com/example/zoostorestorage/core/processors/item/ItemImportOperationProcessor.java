@@ -3,9 +3,9 @@ package com.example.zoostorestorage.core.processors.item;
 import com.example.zoostorestorage.core.exceptions.ItemNotFoundException;
 import com.example.zoostorestorage.persistence.entities.Storage;
 import com.example.zoostorestorage.persistence.repositories.StorageRepository;
-import com.example.zoostorestorage.api.inputOutput.item.importItem.ImportItemInput;
-import com.example.zoostorestorage.api.inputOutput.item.importItem.ImportItemOutput;
-import com.example.zoostorestorage.api.inputOutput.item.importItem.ItemImportOperation;
+import com.example.zoostorestorage.api.inputoutput.item.importitem.ImportItemInput;
+import com.example.zoostorestorage.api.inputoutput.item.importitem.ImportItemOutput;
+import com.example.zoostorestorage.api.inputoutput.item.importitem.ItemImportOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

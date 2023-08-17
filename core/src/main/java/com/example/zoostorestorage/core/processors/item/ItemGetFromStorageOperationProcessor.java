@@ -1,8 +1,8 @@
 package com.example.zoostorestorage.core.processors.item;
 
-import com.example.zoostorestorage.api.inputOutput.item.getItemFromStorage.GetItemFromStorageInput;
-import com.example.zoostorestorage.api.inputOutput.item.getItemFromStorage.GetItemFromStorageOutput;
-import com.example.zoostorestorage.api.inputOutput.item.getItemFromStorage.ItemGetFromStorageOperation;
+import com.example.zoostorestorage.api.inputoutput.item.getfromstorage.GetItemFromStorageInput;
+import com.example.zoostorestorage.api.inputoutput.item.getfromstorage.GetItemFromStorageOutput;
+import com.example.zoostorestorage.api.inputoutput.item.getfromstorage.ItemGetFromStorageOperation;
 import com.example.zoostorestorage.core.exceptions.ItemNotFoundException;
 import com.example.zoostorestorage.persistence.entities.Storage;
 import com.example.zoostorestorage.persistence.repositories.StorageRepository;
