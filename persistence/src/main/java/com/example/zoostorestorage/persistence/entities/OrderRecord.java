@@ -14,13 +14,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "transaction_records")
+@Table(name = "order_records")
 public class OrderRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
     private String userId;
     @OneToMany(mappedBy = "orderRecord")
     private List<OrderItem> items;

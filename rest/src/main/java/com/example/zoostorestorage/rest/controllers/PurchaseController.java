@@ -1,14 +1,11 @@
 package com.example.zoostorestorage.rest.controllers;
 
-import com.example.zoostorestorage.api.inputOutput.transaction.CreateOrderRecordInput;
-import com.example.zoostorestorage.api.inputOutput.transaction.CreateOrderRecordOutput;
-import com.example.zoostorestorage.api.inputOutput.transaction.OrderRecordCreateOperation;
+import com.example.zoostorestorage.api.inputOutput.order.CreateOrderRecordInput;
+import com.example.zoostorestorage.api.inputOutput.order.CreateOrderRecordOutput;
+import com.example.zoostorestorage.api.inputOutput.order.OrderRecordCreateOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,7 +15,7 @@ public class PurchaseController {
     private final OrderRecordCreateOperation orderRecordCreateOperation;
 
     @PostMapping
-    public ResponseEntity<CreateOrderRecordOutput> createTransaction(@RequestBody CreateOrderRecordInput input){
+    public ResponseEntity<CreateOrderRecordOutput>  createOrderRecord(@RequestBody CreateOrderRecordInput input){
         return ResponseEntity.status(201).body(orderRecordCreateOperation.process(input));
     }
 

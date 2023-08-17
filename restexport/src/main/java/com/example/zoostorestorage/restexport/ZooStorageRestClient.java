@@ -1,8 +1,8 @@
 package com.example.zoostorestorage.restexport;
 
 import com.example.zoostorestorage.api.inputOutput.item.getItemFromStorage.GetItemFromStorageOutput;
-import com.example.zoostorestorage.api.inputOutput.transaction.CreateOrderRecordInput;
-import com.example.zoostorestorage.api.inputOutput.transaction.CreateOrderRecordOutput;
+import com.example.zoostorestorage.api.inputOutput.order.CreateOrderRecordInput;
+import com.example.zoostorestorage.api.inputOutput.order.CreateOrderRecordOutput;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
@@ -14,5 +14,5 @@ public interface ZooStorageRestClient {
     GetItemFromStorageOutput getItemFromStorage(@Param("id") String id);
 
     @RequestLine("POST /purchase")
-    CreateOrderRecordOutput createTransaction(CreateOrderRecordInput input);
+    CreateOrderRecordOutput createOrderRecord(CreateOrderRecordInput input);
 }

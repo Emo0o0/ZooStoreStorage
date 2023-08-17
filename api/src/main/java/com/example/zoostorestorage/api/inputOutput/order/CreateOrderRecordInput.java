@@ -1,7 +1,9 @@
-package com.example.zoostorestorage.api.inputOutput.transaction;
+package com.example.zoostorestorage.api.inputOutput.order;
 
 import com.example.zoostorestorage.api.base.OperationInput;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -11,7 +13,6 @@ import lombok.*;
 public class CreateOrderRecordInput implements OperationInput {
 
     private String userId;
-    private String itemId;
-    private String quantity;
+    private List<OrderRecordItemOutput> items;
     private String totalPrice;
 }

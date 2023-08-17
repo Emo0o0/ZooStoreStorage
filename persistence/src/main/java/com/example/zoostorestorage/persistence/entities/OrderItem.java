@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "transaction_items")
+@Table(name = "order_items")
 public class OrderItem {
 
     @Id
@@ -19,6 +19,7 @@ public class OrderItem {
     private UUID id;
     private String itemId;
     private String quantity;
+    private String price;
     @ManyToOne
     private OrderRecord orderRecord;
 
