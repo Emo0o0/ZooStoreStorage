@@ -24,6 +24,8 @@ public class OrderRecord {
     @OneToMany(mappedBy = "orderRecord")
     private List<OrderItem> items;
     private String totalPrice;
+    private String coupon;
+    private String discount;
     @CreationTimestamp
     private Timestamp timestamp;
 

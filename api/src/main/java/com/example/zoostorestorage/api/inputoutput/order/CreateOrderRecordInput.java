@@ -14,5 +14,7 @@ public class CreateOrderRecordInput implements OperationInput {
 
     private String userId;
     private List<OrderRecordItemOutput> items;
+    private String coupon;
+    private String discount;
     private String totalPrice;
 }

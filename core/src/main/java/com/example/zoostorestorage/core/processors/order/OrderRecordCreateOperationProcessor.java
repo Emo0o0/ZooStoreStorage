@@ -28,6 +28,8 @@ public class OrderRecordCreateOperationProcessor implements OrderRecordCreateOpe
         OrderRecord orderRecord = OrderRecord.builder()
                 .userId(input.getUserId())
                 .items(new ArrayList<>())
+                .coupon(input.getCoupon())
+                .discount(input.getDiscount())
                 .totalPrice(input.getTotalPrice())
                 .build();
         orderRecordRepository.save(orderRecord);
