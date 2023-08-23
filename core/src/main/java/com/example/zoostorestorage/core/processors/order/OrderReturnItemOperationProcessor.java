@@ -35,9 +35,8 @@ public class OrderReturnItemOperationProcessor implements OrderReturnItemOperati
     private final OrderItemRepository orderItemRepository;
     private final ReturnedItemRepository returnedItemRepository;
     private final ItemImportOperation itemImportOperation;
-
     @Value("${DAYS_UNTIL_NO_RETURN}")
-    private final Integer daysUntilNoReturn;
+    private String daysUntilNoReturn;
     @Override
     public ReturnItemOutput process(ReturnItemListInput input) {
 
@@ -47,7 +46,7 @@ public class OrderReturnItemOperationProcessor implements OrderReturnItemOperati
         LocalDateTime datePurchased = orderRecord.getTimestamp().toInstant().atZone(ZoneId.of("UTC")).toLocalDateTime();
         LocalDateTime currentDate = Instant.now().atZone(ZoneId.of("UTC")).toLocalDateTime();
 
-        if (datePurchased.plusDays(daysUntilNoReturn).isBefore(currentDate)) {
+        if (datePurchased.plusDays(Integer.parseInt(daysUntilNoReturn)).isBefore(currentDate)) {
             throw new PastReturnDateException(daysUntilNoReturn + " days have passed. Items cannot be returned");
         }
 
