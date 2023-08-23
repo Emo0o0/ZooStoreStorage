@@ -81,19 +81,6 @@ public class OrderReturnItemOperationProcessor implements OrderReturnItemOperati
                         throw new InsufficientQuantityException("Can't return more than you purchased");
                     }
 
-//                    int itemIndex = orderRecord.getItems().indexOf(orderItem);
-//                    OrderItem orderItem1 = orderRecord.getItems().get(itemIndex);
-//                    orderItem1.setQuantity(String.valueOf(quantity));
-//                    orderItemRepository.save(orderItem1);
-//                    OrderRecord save = orderRecordRepository.save(orderRecord);
-//
-//                    ReturnedItem returnedItem = ReturnedItem.builder()
-//                            .orderRecordId(save.getId().toString())
-//                            .itemId(orderItem.getItemId())
-//                            .quantity(Integer.parseInt(orderItem.getQuantity()))
-//                            .price(BigDecimal.valueOf(Double.valueOf(orderItem.getPrice())))
-//                            .build();
-//                    returnedItemRepository.save(returnedItem);
 
                     int itemIndex = orderRecord.getItems().indexOf(orderItem);
                     orderRecord.getItems().get(itemIndex).setQuantity(String.valueOf(quantity));
@@ -108,13 +95,6 @@ public class OrderReturnItemOperationProcessor implements OrderReturnItemOperati
                             .pricePer(BigDecimal.valueOf(Double.valueOf(orderItem.getPricePer())))
                             .build();
                     returnedItemRepository.save(returnedItem);
-
-
-//                    if (quantity == 0) {
-//                        orderRecord.getItems().remove(orderItem);
-//                        orderItemRepository.delete(orderItem);
-//                        orderRecordRepository.save(orderRecord);
-//                    }
 
                     ImportItemInput importInput = ImportItemInput.builder()
                             .itemId(item.getItemId())

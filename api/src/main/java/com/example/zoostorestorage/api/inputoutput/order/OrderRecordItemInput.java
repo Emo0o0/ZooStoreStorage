@@ -13,5 +13,4 @@ public class OrderRecordItemInput implements OperationInput {
     private String itemId;
     private String quantity;
     private String price;
-    //private String orderRecordId;
 }
