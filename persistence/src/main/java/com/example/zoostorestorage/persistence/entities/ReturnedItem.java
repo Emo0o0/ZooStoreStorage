@@ -2,8 +2,10 @@ package com.example.zoostorestorage.persistence.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Getter
@@ -21,5 +23,7 @@ public class ReturnedItem {
     private String orderRecordId;
     private String itemId;
     private int quantity;
-    private BigDecimal price;
+    private BigDecimal pricePer;
+    @CreationTimestamp
+    private Timestamp timestamp;
 }

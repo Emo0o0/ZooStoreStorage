@@ -19,7 +19,7 @@ public class OrderItem {
     private UUID id;
     private String itemId;
     private String quantity;
-    private String price;
+    private String pricePer;
     @ManyToOne
     private OrderRecord orderRecord;
 

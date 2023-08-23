@@ -15,13 +15,11 @@ import com.example.zoostorestorage.persistence.repositories.OrderRecordRepositor
 import com.example.zoostorestorage.persistence.repositories.ReturnedItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.bouncycastle.asn1.cms.TimeStampAndCRL;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Set;
@@ -38,10 +36,10 @@ public class OrderReturnItemOperationProcessor implements OrderReturnItemOperati
     private final ReturnedItemRepository returnedItemRepository;
     private final ItemImportOperation itemImportOperation;
 
+    @Value("${DAYS_UNTIL_NO_RETURN}")
+    private final Integer daysUntilNoReturn;
     @Override
     public ReturnItemOutput process(ReturnItemListInput input) {
-
-        Integer daysUntilNoReturn = 14;
 
         OrderRecord orderRecord = orderRecordRepository.findById(UUID.fromString(input.getOrderRecordId()))
                 .orElseThrow(() -> new OrderRecordNotFoundException("Order record not found"));
@@ -83,26 +81,40 @@ public class OrderReturnItemOperationProcessor implements OrderReturnItemOperati
                         throw new InsufficientQuantityException("Can't return more than you purchased");
                     }
 
+//                    int itemIndex = orderRecord.getItems().indexOf(orderItem);
+//                    OrderItem orderItem1 = orderRecord.getItems().get(itemIndex);
+//                    orderItem1.setQuantity(String.valueOf(quantity));
+//                    orderItemRepository.save(orderItem1);
+//                    OrderRecord save = orderRecordRepository.save(orderRecord);
+//
+//                    ReturnedItem returnedItem = ReturnedItem.builder()
+//                            .orderRecordId(save.getId().toString())
+//                            .itemId(orderItem.getItemId())
+//                            .quantity(Integer.parseInt(orderItem.getQuantity()))
+//                            .price(BigDecimal.valueOf(Double.valueOf(orderItem.getPrice())))
+//                            .build();
+//                    returnedItemRepository.save(returnedItem);
+
                     int itemIndex = orderRecord.getItems().indexOf(orderItem);
-                    OrderItem orderItem1 = orderRecord.getItems().get(itemIndex);
-                    orderItem1.setQuantity(String.valueOf(quantity));
-                    //orderItem.setQuantity(String.valueOf(quantity));
-                    orderItemRepository.save(orderItem1);
-                    OrderRecord save = orderRecordRepository.save(orderRecord);
+                    orderRecord.getItems().get(itemIndex).setQuantity(String.valueOf(quantity));
+                    orderItemRepository.save(orderRecord.getItems().get(itemIndex));
+                    orderRecord.setReturnedItems(true);
+                    orderRecordRepository.save(orderRecord);
 
                     ReturnedItem returnedItem = ReturnedItem.builder()
-                            .orderRecordId(save.getId().toString())
+                            .orderRecordId(orderRecord.getId().toString())
                             .itemId(orderItem.getItemId())
-                            .quantity(Integer.parseInt(orderItem.getQuantity()))
-                            .price(BigDecimal.valueOf(Double.valueOf(orderItem.getPrice())))
+                            .quantity(Integer.parseInt(String.valueOf(item.getQuantity())))
+                            .pricePer(BigDecimal.valueOf(Double.valueOf(orderItem.getPricePer())))
                             .build();
                     returnedItemRepository.save(returnedItem);
 
-                    if (quantity == 0) {
-                        orderRecord.getItems().remove(orderItem);
-                        orderItemRepository.delete(orderItem);
-                        orderRecordRepository.save(orderRecord);
-                    }
+
+//                    if (quantity == 0) {
+//                        orderRecord.getItems().remove(orderItem);
+//                        orderItemRepository.delete(orderItem);
+//                        orderRecordRepository.save(orderRecord);
+//                    }
 
                     ImportItemInput importInput = ImportItemInput.builder()
                             .itemId(item.getItemId())
