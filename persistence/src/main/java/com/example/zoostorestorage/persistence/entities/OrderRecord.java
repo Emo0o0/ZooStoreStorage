@@ -28,5 +28,6 @@ public class OrderRecord {
     private String discount;
     @CreationTimestamp
     private Timestamp timestamp;
+    private boolean returnedItems = false;
 
 }
