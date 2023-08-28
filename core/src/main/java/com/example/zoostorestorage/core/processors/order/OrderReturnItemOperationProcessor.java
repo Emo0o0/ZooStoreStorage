@@ -36,39 +36,15 @@ public class OrderReturnItemOperationProcessor implements OrderReturnItemOperati
     private final ReturnedItemRepository returnedItemRepository;
     private final ItemImportOperation itemImportOperation;
     @Value("${DAYS_UNTIL_NO_RETURN}")
-    private String daysUntilNoReturn;
+    private Integer daysUntilNoReturn;
+
     @Override
     public ReturnItemOutput process(ReturnItemListInput input) {
 
         OrderRecord orderRecord = orderRecordRepository.findById(UUID.fromString(input.getOrderRecordId()))
                 .orElseThrow(() -> new OrderRecordNotFoundException("Order record not found"));
 
-        LocalDateTime datePurchased = orderRecord.getTimestamp().toInstant().atZone(ZoneId.of("UTC")).toLocalDateTime();
-        LocalDateTime currentDate = Instant.now().atZone(ZoneId.of("UTC")).toLocalDateTime();
-
-        if (datePurchased.plusDays(Integer.parseInt(daysUntilNoReturn)).isBefore(currentDate)) {
-            throw new PastReturnDateException(daysUntilNoReturn + " days have passed. Items cannot be returned");
-        }
-
-        log.info("User ID from order record : {}", orderRecord.getUserId());
-        log.info("User ID from input : {}", input.getUserId());
-
-        if (!orderRecord.getUserId().equals(input.getUserId())) {
-
-            throw new WrongRecordException("An order with this id was not found");
-        }
-
-        Set<String> orderRecordItemsIds = orderRecord.getItems().stream()
-                .map(OrderItem::getItemId)
-                .collect(Collectors.toSet());
-
-        Set<String> inputItemsIds = input.getItemsForReturn().stream()
-                .map(ReturnItemInput::getItemId)
-                .collect(Collectors.toSet());
-
-        if (!orderRecordItemsIds.containsAll(inputItemsIds)) {
-            throw new ItemNotFoundException("An item was not found in your cart from order " + orderRecord.getId().toString());
-        }
+        validations(input);
 
 
         input.getItemsForReturn().forEach(item -> orderRecord.getItems().stream()
@@ -110,4 +86,40 @@ public class OrderReturnItemOperationProcessor implements OrderReturnItemOperati
         return output;
 
     }
+
+    private Boolean validations(ReturnItemListInput input) {
+
+        OrderRecord orderRecord = orderRecordRepository.findById(UUID.fromString(input.getOrderRecordId()))
+                .orElseThrow(() -> new OrderRecordNotFoundException("Order record not found"));
+
+        LocalDateTime datePurchased = orderRecord.getTimestamp().toInstant().atZone(ZoneId.of("UTC")).toLocalDateTime();
+        LocalDateTime currentDate = Instant.now().atZone(ZoneId.of("UTC")).toLocalDateTime();
+
+        if (datePurchased.plusDays((daysUntilNoReturn)).isBefore(currentDate)) {
+            throw new PastReturnDateException(daysUntilNoReturn + " days have passed. Items cannot be returned");
+        }
+
+        log.info("User ID from order record : {}", orderRecord.getUserId());
+        log.info("User ID from input : {}", input.getUserId());
+
+        if (!orderRecord.getUserId().equals(input.getUserId())) {
+
+            throw new WrongRecordException("An order with this id was not found");
+        }
+
+        Set<String> orderRecordItemsIds = orderRecord.getItems().stream()
+                .map(OrderItem::getItemId)
+                .collect(Collectors.toSet());
+
+        Set<String> inputItemsIds = input.getItemsForReturn().stream()
+                .map(ReturnItemInput::getItemId)
+                .collect(Collectors.toSet());
+
+        if (!orderRecordItemsIds.containsAll(inputItemsIds)) {
+            throw new ItemNotFoundException("An item was not found in your cart from order " + orderRecord.getId().toString());
+        }
+
+        return true;
+    }
+
 }
